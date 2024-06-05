@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { putUpdateUser } from '../../services/UserServices';
 import { toast } from 'react-toastify';
+import { set } from 'lodash';
 
 const ModalEditUser = (props) => {
     const { show, handleClose, dataUserEdit, handleEditUserFrommodal } = props;
@@ -10,11 +11,13 @@ const ModalEditUser = (props) => {
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
     const [avatar, setAvatar] = useState('');
+    const [password, setpassword] = useState('');
+
 
     const handleUpdateUser = async () => {
         try {
             console.log("Updating user:", dataUserEdit.id, email, first_name, last_name, avatar);
-            let res = await putUpdateUser(dataUserEdit.id, email, first_name, last_name, avatar);
+            let res = await putUpdateUser(dataUserEdit.id, email, first_name, last_name, avatar, password);
             console.log("Update user response:", res);
             if (res) {
                 console.log("User update successful. Data:", res);
@@ -23,7 +26,8 @@ const ModalEditUser = (props) => {
                     email: email,
                     first_name: first_name,
                     last_name: last_name,
-                    avatar: avatar
+                    avatar: avatar,
+                    password: password
                 });
                 handleClose();
                 toast.success("User updated successfully");
@@ -39,6 +43,7 @@ const ModalEditUser = (props) => {
             setFirstName(dataUserEdit.first_name);
             setLastName(dataUserEdit.last_name);
             setAvatar(dataUserEdit.avatar);
+            setpassword(dataUserEdit.password);
         }
     }, [show, dataUserEdit]);
 
@@ -75,6 +80,12 @@ const ModalEditUser = (props) => {
                                     value={avatar}
                                     onChange={(e) => setAvatar(e.target.value)} />
                             </div>
+                            <div class="form-group">
+                                    <label className="form-label">Password</label>
+                                    <input type="text" class="form-control" placeholder="Avatar"
+                                        value={password}
+                                        onChange={(e) => setpassword(e.target.value)} />
+                                </div>
                         </form>
                     </div>
                 </Modal.Body>

@@ -19,6 +19,7 @@ namespace WebApi.Migrations
                     email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     firstname = table.Column<string>(name: "first_name", type: "nvarchar(max)", nullable: false),
                     lastname = table.Column<string>(name: "last_name", type: "nvarchar(max)", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     avatar = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

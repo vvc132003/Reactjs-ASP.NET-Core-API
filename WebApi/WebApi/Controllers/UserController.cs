@@ -74,5 +74,27 @@ namespace WebApi.Controllers
             _context.SaveChanges();
             return Ok(user);
         }
+        [HttpPost("login")]
+        public async Task<ActionResult<User>> Login(UserLoginModel model)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.email == model.email && u.password == model.password);
+
+            if (user == null)
+            {
+                return NotFound("Invalid email or password");
+            }
+
+            return user;
+        }
+        public class UserLoginModel
+        {
+            public string email { get; set; }
+            public string password { get; set; }
+        }
+      /*  public User CheckUserUsnamePass(string email, string password)
+        {
+            User user = _context.Users.FirstOrDefault(u => u.email == email && u.password == password);
+            return user;
+        }*/
     }
 }

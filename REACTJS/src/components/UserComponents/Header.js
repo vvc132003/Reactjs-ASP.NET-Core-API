@@ -1,21 +1,29 @@
 import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
+import { useLocation, NavLink } from 'react-router-dom';
 const Header = (props) => {
+    const location = useLocation();
     return (
         <>
             <Navbar bg="gray" expand="md">
                 <Container>
-                    <Navbar.Brand href="#home">Thích thì code</Navbar.Brand>
+                    <Navbar.Brand href="/">Thích thì code</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#link">Link</Nav.Link>
-                            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Dropdown Item 1</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Dropdown Item 2</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Dropdown Item 3</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Another Item</NavDropdown.Item>
+                            <NavLink to="/" className="nav-link" >
+                                Home
+                            </NavLink>
+                            <NavLink to="rooms/phongs" className="nav-link" >
+                                Phòng
+                            </NavLink>
+                            <NavLink to="/users" className="nav-link" >
+                                User
+                            </NavLink>
+                        </Nav>
+                        <Nav>
+                            <NavDropdown title="Setting" >
+                                <NavDropdown.Item href="/logins">Login</NavDropdown.Item>
+                                <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>

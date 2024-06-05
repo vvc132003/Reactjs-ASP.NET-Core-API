@@ -31,6 +31,7 @@ const TableUser = () => {
         cloneListUser[index].last_name = user.last_name;
         cloneListUser[index].email = user.email;
         cloneListUser[index].avatar = user.avatar;
+        cloneListUser[index].password = user.password;
         setListUser(cloneListUser);
     }
     useEffect(() => {
@@ -91,6 +92,7 @@ const TableUser = () => {
                         <th>Email</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Password</th>
                         <th>Avatar</th>
                     </tr>
                 </thead>
@@ -102,6 +104,7 @@ const TableUser = () => {
                                 <td>{user.email}</td>
                                 <td>{user.first_name}</td>
                                 <td>{user.last_name}</td>
+                                <td>{user.password}</td>
                                 <td><img style={{ width: 40 }} src={user.avatar} alt={user.first_name} /></td>
                                 <td>
                                     <Button onClick={() => handleShowGetbyideUser(user.id)} variant="warning">Edit</Button>{' '}

@@ -10,14 +10,16 @@ const ModalAddUser = (props) => {
     const [first_name, setfirst_name] = useState('');
     const [last_name, setlast_name] = useState('');
     const [avatar, setavatar] = useState('');
+    const [password, setpassword] = useState('');
     const handleSave = async () => {
-        let res = await postCreateUser(email, first_name, last_name, avatar);
+        let res = await postCreateUser(email, first_name, last_name, avatar, password);
         if (res && res.id) {
             handleClose();
             setEmail("");
             setfirst_name("");
             setlast_name("");
             setavatar("");
+            setpassword("");
             toast.success("Create user successfully");
             handleUpdateTable({
                 id: res.id,
@@ -25,6 +27,7 @@ const ModalAddUser = (props) => {
                 first_name: res.first_name,
                 last_name: res.last_name,
                 avatar: res.avatar,
+                password: res.password
             });
         } else {
             toast.error("Create user failed");
@@ -63,6 +66,12 @@ const ModalAddUser = (props) => {
                                     <input type="text" class="form-control" placeholder="Avatar"
                                         value={avatar}
                                         onChange={(e) => setavatar(e.target.value)} />
+                                </div>
+                                <div class="form-group">
+                                    <label className="form-label">Password</label>
+                                    <input type="password" class="form-control" placeholder="Avatar"
+                                        value={password}
+                                        onChange={(e) => setpassword(e.target.value)} />
                                 </div>
                             </form>
                         </div>
