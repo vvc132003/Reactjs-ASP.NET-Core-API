@@ -1,8 +1,9 @@
+import React from 'react';
 import { Nav, Navbar, Container, NavDropdown, Image } from 'react-bootstrap';
-import { useLocation, NavLink } from 'react-router-dom'
-import logo from 'D:/REACTJS/REACTJS/src/logo192.png'
-const Header = (props) => {
-    const location = useLocation();
+import { NavLink } from 'react-router-dom';
+import logo from 'D:/REACTJS/REACTJS/src/logo192.png';
+
+const Header = ({ isLoggedIn, userInfo, handleLogout }) => {
     return (
         <Navbar style={{ backgroundColor: '#74412c' }} variant="dark" expand="md" sticky="top">
             <Container>
@@ -26,10 +27,15 @@ const Header = (props) => {
                         </Nav.Link>
                     </Nav>
                     <Nav>
-                        <NavDropdown title="Setting">
-                            <NavDropdown.Item href="/logins">Login</NavDropdown.Item>
-                            <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
-                        </NavDropdown>
+                        {isLoggedIn ? (
+                            <NavDropdown title={userInfo?.first_name || 'User'}>
+                                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                            </NavDropdown>
+                        ) : (
+                            <NavDropdown title="Setting">
+                                <NavDropdown.Item href="/logins">Login</NavDropdown.Item>
+                            </NavDropdown>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

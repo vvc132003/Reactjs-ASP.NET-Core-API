@@ -5,8 +5,13 @@ import { getbyideUser, deleteUser, fetchAllUser } from '../../services/UserServi
 import ModalAddUser from './ModalAddUser';
 import Button from 'react-bootstrap/Button';
 import ModalEditUser from './ModalEditUser';
+import { useNavigate } from 'react-router-dom';
+
 import _ from "lodash"
 const TableUser = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+    const navigate = useNavigate();
 
     const [listUsers, setListUser] = useState([]);
     const [totalUser, setTotalUser] = useState(0);
@@ -20,6 +25,31 @@ const TableUser = () => {
     const handleShow = () => setShow(true);
 
 
+    const checkAuth = () => {
+        const session = sessionStorage.getItem('user');
+        console.log('Session storage:', session); // Kiểm tra dữ liệu session
+        const userIsAuthenticated = session ? true : false;
+        setIsLoggedIn(userIsAuthenticated);
+        setIsCheckingAuth(false); 
+    };
+
+    useEffect(() => {
+        checkAuth();
+    }, []);
+    useEffect(() => {
+        if (!isCheckingAuth) {
+            if (!isLoggedIn) {
+                navigate('/logins');
+            } else {
+                getUsers(1);
+            }
+        }
+    }, [isLoggedIn, isCheckingAuth, navigate]);
+    
+
+    if (isCheckingAuth) {
+        return <div>Loading...</div>;
+    }
     const handleUpdateTable = (user) => {
         setListUser([user, ...listUsers]);
     }
@@ -34,9 +64,9 @@ const TableUser = () => {
         cloneListUser[index].password = user.password;
         setListUser(cloneListUser);
     }
-    useEffect(() => {
-        getUsers(1);
-    }, [])
+    // useEffect(() => {
+    //     getUsers(1);
+    // }, [])
 
     const getUsers = async (page) => {
         try {
