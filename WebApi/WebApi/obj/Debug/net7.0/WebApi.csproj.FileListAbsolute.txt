@@ -150,3 +150,5 @@ D:\REACTJS\WebApi\WebApi\obj\Debug\net7.0\refint\WebApi.dll
 D:\REACTJS\WebApi\WebApi\obj\Debug\net7.0\WebApi.pdb
 D:\REACTJS\WebApi\WebApi\obj\Debug\net7.0\WebApi.genruntimeconfig.cache
 D:\REACTJS\WebApi\WebApi\obj\Debug\net7.0\ref\WebApi.dll
+D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\System.Net.WebSockets.WebSocketProtocol.dll

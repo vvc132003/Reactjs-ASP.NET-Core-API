@@ -9,12 +9,13 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './components/UserComponents/Login';
 import Phong from './components/Rooms/Phong';
 import RoomDetail from './components/Rooms/RoomDetail';
-
+import ChatComponent from './components/UserComponents/ChatComponent';
 function App() {
   return (
     <>
       <div className='app-container'>
         <Header />
+        <br/>
         <Container>
           <Routes>
             <Route path='/' element={<Home />} />
@@ -22,6 +23,7 @@ function App() {
             <Route path='/logins' element={<Login />} />
             <Route path='rooms/phongs' element={<Phong />} />
             <Route path='rooms/room/:roomNumber' element={<RoomDetail />} />
+            <Route path='/chat' element={<ChatComponent />} />
           </Routes>
         </Container>
       </div>

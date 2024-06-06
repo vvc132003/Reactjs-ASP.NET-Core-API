@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models;
@@ -11,11 +12,28 @@ namespace WebApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<ChatHub> _hubContext;
 
-        public UserController(ApplicationDbContext context)
+        public UserController(ApplicationDbContext context, IHubContext<ChatHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
+        [HttpPost("sendmessage")]
+        public async Task<IActionResult> SendMessage(ChatMessage message)
+        {
+            _context.ChatMessages.Add(new ChatMessage { User = message.User, Message = message.Message });
+            await _context.SaveChangesAsync();
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", message.User, message.Message);
+            return Ok();
+        }
+        [HttpGet("messages")]
+        public async Task<IActionResult> GetMessages()
+        {
+            var messages = await _context.ChatMessages.ToListAsync();
+            return Ok(messages);
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAllUser(int page = 1)
         {
@@ -96,5 +114,7 @@ namespace WebApi.Controllers
             User user = _context.Users.FirstOrDefault(u => u.email == email && u.password == password);
             return user;
         }*/
+
+
     }
 }
