@@ -1,7 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<CuocHoiThoaiService>();
+builder.Services.AddScoped<NguoiThamGiaService>();
+builder.Services.AddScoped<TinNhanService>();
+builder.Services.AddScoped<UserService>();
 
 // Add services to the container.
 

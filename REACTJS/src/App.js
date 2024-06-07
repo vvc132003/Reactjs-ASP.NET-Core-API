@@ -10,6 +10,7 @@ import LoginForm from './components/Home/Login';
 import Phong from './components/Rooms/Phong';
 import RoomDetail from './components/Rooms/RoomDetail';
 import ChatComponent from './components/UserComponents/ChatComponent';
+import Chat from './components/Home/Chat';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,7 +52,7 @@ function App() {
             <Route path='/logins' element={<LoginForm handleLogin={handleLogin} />} />
             <Route path='rooms/phongs' element={<Phong />} />
             <Route path='rooms/room/:roomNumber' element={<RoomDetail />} />
-            <Route path='/chat' element={<ChatComponent />} />
+            <Route path='/chat/:cuochoithoaiid' element={<Chat />} />
           </Routes>
         </Container>
       </div>

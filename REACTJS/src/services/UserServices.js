@@ -5,8 +5,9 @@ const fetchAllUser = (page) => {
 const deleteUser = (id) => {
     return axios.delete(`api/user/${id}`);
 }
-const postCreateUser = (email, first_name, last_name, avatar, password) => {
-    return axios.post("/api/user", { email: email, first_name: first_name, last_name: last_name, avatar: avatar, password: password });
+const postCreateUser = (email, first_name, last_name, password, avatar) => {
+    console.log(email, first_name, last_name, password, avatar);
+    return axios.post("/api/user", { email: email, first_name: first_name, last_name: last_name, password: password, avatar: avatar });
 }
 const getbyideUser = (id) => {
     return axios.get(`/api/user/getbyiduser/${id}`);

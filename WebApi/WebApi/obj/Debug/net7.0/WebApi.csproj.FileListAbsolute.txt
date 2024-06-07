@@ -152,3 +152,9 @@ D:\REACTJS\WebApi\WebApi\obj\Debug\net7.0\WebApi.genruntimeconfig.cache
 D:\REACTJS\WebApi\WebApi\obj\Debug\net7.0\ref\WebApi.dll
 D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\Newtonsoft.Json.dll
 D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\System.Net.WebSockets.WebSocketProtocol.dll
+D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\Antlr3.Runtime.dll
+D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\FluentNHibernate.dll
+D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\Iesi.Collections.dll
+D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\NHibernate.dll
+D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\Remotion.Linq.dll
+D:\REACTJS\WebApi\WebApi\bin\Debug\net7.0\Remotion.Linq.EagerFetching.dll

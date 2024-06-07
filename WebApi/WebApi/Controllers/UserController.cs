@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models;
@@ -49,10 +50,18 @@ namespace WebApi.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<User>> AddUser(User user)
+        public async Task<ActionResult<User>> AddUser(UserModel usermodel)
         {
             if (ModelState.IsValid)
             {
+                var user = new User
+                {
+                    email = usermodel.email,
+                    first_name = usermodel.first_name,
+                    last_name = usermodel.last_name,
+                    password = usermodel.password,
+                    avatar = usermodel.avatar
+                };
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
                 return CreatedAtAction(nameof(GetAllUser), new { id = user.id }, user);
@@ -109,11 +118,11 @@ namespace WebApi.Controllers
             public string email { get; set; }
             public string password { get; set; }
         }
-      /*  public User CheckUserUsnamePass(string email, string password)
-        {
-            User user = _context.Users.FirstOrDefault(u => u.email == email && u.password == password);
-            return user;
-        }*/
+        /*  public User CheckUserUsnamePass(string email, string password)
+          {
+              User user = _context.Users.FirstOrDefault(u => u.email == email && u.password == password);
+              return user;
+          }*/
 
 
     }

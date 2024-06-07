@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApi.Models
 {
@@ -11,5 +12,8 @@ namespace WebApi.Models
         public string last_name { get; set; }
         public string password { get; set; }
         public string avatar { get; set; }
+        public virtual ICollection<CuocHoiThoai> CuocHoiThoais { get; set; }
+        public virtual ICollection<NguoiThamGia> NguoiThamGias { get; set; }
+        public virtual ICollection<TinNhan> TinNhans { get; set; }
     }
 }

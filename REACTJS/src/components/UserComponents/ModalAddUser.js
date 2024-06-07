@@ -12,7 +12,9 @@ const ModalAddUser = (props) => {
     const [avatar, setavatar] = useState('');
     const [password, setpassword] = useState('');
     const handleSave = async () => {
-        let res = await postCreateUser(email, first_name, last_name, avatar, password);
+        console.log(email, first_name, last_name, password, avatar);
+        let res = await postCreateUser(email, first_name, last_name, password, avatar);
+        console.log(res);
         if (res && res.id) {
             handleClose();
             setEmail("");
