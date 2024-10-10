@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models;
+using WebApi.Services;
 
 namespace WebApi.Controllers
 {
@@ -14,12 +15,48 @@ namespace WebApi.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IHubContext<ChatHub> _hubContext;
+        private readonly TinNhanService _twinNhanService;
 
-        public UserController(ApplicationDbContext context, IHubContext<ChatHub> hubContext)
+        public UserController(ApplicationDbContext context, IHubContext<ChatHub> hubContext, TinNhanService tinNhanService)
         {
             _context = context;
             _hubContext = hubContext;
+            _twinNhanService = tinNhanService;
         }
+
+
+
+        [HttpPost("AddTinNhan")]
+        public async Task<IActionResult> AddTinNhan([FromBody] TinNhans tinNhan)
+        {
+            if (tinNhan == null)
+            {
+                return BadRequest("Tin nhắn không hợp lệ.");
+            }
+
+            try
+            {
+                var newTinNhan = new TinNhan
+                {
+                    CuocHoiThoaiId = tinNhan.CuocHoiThoaiId,
+                    NhanVienGuiId = tinNhan.NhanVienGuiId,
+                    LoaiTinNhan = tinNhan.LoaiTinNhan,
+                    Noidung = tinNhan.Noidung,
+                    Duoctaovao = DateTime.Now,
+                    Daxoavao = DateTime.Now
+                };
+
+                await _twinNhanService.AddTinNhanAsync(newTinNhan);
+                return Ok(new { message = "Tin nhắn đã được thêm thành công." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi máy chủ: {ex.Message}");
+            }
+        }
+
+
+
         [HttpPost("sendmessage")]
         public async Task<IActionResult> SendMessage(ChatMessage message)
         {

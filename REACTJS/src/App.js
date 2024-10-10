@@ -11,17 +11,25 @@ import Phong from './components/Rooms/Phong';
 import RoomDetail from './components/Rooms/RoomDetail';
 import ChatComponent from './components/UserComponents/ChatComponent';
 import Chat from './components/Home/Chat';
+import { DanhSachCuocTroChuyen, GetLatestCuocHoiThoai } from './services/Chat';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
-
   const navigate = useNavigate();
 
-  const handleLogin = (user) => {
+  const handleLogin = async (user) => {
     setIsLoggedIn(true);
     setUserInfo(user);
-    navigate('/');
+
+    try {
+      const userInfo = JSON.parse(sessionStorage.getItem('user'));
+      const response = await GetLatestCuocHoiThoai(userInfo.id);
+      const latestConversationId = response.id;
+      navigate(`home/chat/${latestConversationId}`);
+    } catch (error) {
+      console.error('Error fetching latest conversation:', error);
+    }
   };
 
   const handleLogout = () => {
@@ -51,8 +59,9 @@ function App() {
             <Route path='/users' element={<TableUser />} />
             <Route path='/logins' element={<LoginForm handleLogin={handleLogin} />} />
             <Route path='rooms/phongs' element={<Phong />} />
+            <Route path='home/chats' element={<ChatComponent />} />
             <Route path='rooms/room/:roomNumber' element={<RoomDetail />} />
-            <Route path='/chat/:cuochoithoaiid' element={<Chat />} />
+            <Route path='home/chat/:cuochoithoaiid' element={<Chat userInfo={userInfo} />} />
           </Routes>
         </Container>
       </div>

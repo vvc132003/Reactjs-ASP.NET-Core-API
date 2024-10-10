@@ -31,4 +31,5 @@ namespace WebApi.Models
 
         public virtual ICollection<TinNhan> TinNhans { get; set; }
     }
+
 }

@@ -29,4 +29,17 @@ namespace WebApi.Models
         [ForeignKey("NhanVienGuiId")]
         public virtual User NhanVienGui { get; set; }
     }
+    public class TinNhans
+    {
+      
+
+        public int CuocHoiThoaiId { get; set; }
+        public int NhanVienGuiId { get; set; }
+        public string LoaiTinNhan { get; set; }
+        public string Noidung { get; set; }
+
+        public DateTime Duoctaovao { get; set; }
+
+        public DateTime Daxoavao { get; set; }
+    }
 }

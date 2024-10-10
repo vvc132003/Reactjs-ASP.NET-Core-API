@@ -22,9 +22,9 @@ const Header = ({ isLoggedIn, userInfo, handleLogout }) => {
                         <Nav.Link as={NavLink} to="/users" activeClassName="active">
                             User
                         </Nav.Link>
-                        <Nav.Link as={NavLink} to="/chat" activeClassName="active">
+                        {/* <Nav.Link as={NavLink} to="" activeClassName="active">
                             Chat
-                        </Nav.Link>
+                        </Nav.Link> */}
                     </Nav>
                     <Nav>
                         {isLoggedIn ? (
